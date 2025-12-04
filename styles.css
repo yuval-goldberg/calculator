@@ -1,0 +1,71 @@
+:root {
+    --number-color: rgb(100, 100, 100, 0.5);
+    --math-operator-color: rgb(255, 136, 0);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2A7B9B;
+    background: linear-gradient(45deg, rgba(42, 123, 155, 1) 30%, rgba(87, 199, 133, 1) 83%);
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.calculator {
+    background-color: transparent;
+    filter: blur(100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 10px 10px 10px;
+    border-radius: 15px;
+    border: 2px solid rgb(255, 255, 255, 0.25);
+    box-shadow: 0 0 4px black;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 8px;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    border: none;
+    font-size: 18px;
+    color: black;
+    transition: 0.1s;
+}
+
+button:hover {
+    filter: brightness(110%);
+}
+
+.number-operator,
+.module-operator {
+    background-color: var(--number-color)
+}
+
+.math-operator {
+    background-color: var(--math-operator-color);
+}
+
+.input-div {
+    display: flex;
+    justify-content: center;
+}
+
+.expression-input {
+    width: 211px;
+    height: 28px;
+    padding: 5px;
+    margin: 8px 0 0 0;
+    font-size: 24px;
+}
