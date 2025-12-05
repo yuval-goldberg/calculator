@@ -11,6 +11,7 @@ let darkMode = false
 let mathExpression = ""
 let currentOperator = ""
 let isParentheses = false
+let isOperatorExist = false
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
@@ -38,9 +39,22 @@ operatorButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
         let currentValue = button.textContent
 
-        mathExpression += currentValue
+        if (isOperatorExist) {
+            operate(mathExpression, currentOperator)
+            // isOperatorExist = false
+            mathExpression += currentOperator
+            currentOperator = currentValue
+            console.log(currentOperator)
+
+        } else {
+            mathExpression += currentValue
+            currentOperator = currentValue
+            isOperatorExist = true
+
+            console.log(currentOperator)
+
+        }
         input.value += currentValue
-        currentOperator = currentValue
 
         // console.log(currentOperator) - // Debug
     })
@@ -49,6 +63,8 @@ operatorButtons.forEach((button) => {
 clearButton.addEventListener('click', (event) => {
     input.value = ""
     mathExpression = ""
+    isParentheses = false
+    isOperatorExist = false
 })
 
 function operate(expression, operator) {
@@ -77,7 +93,7 @@ function operate(expression, operator) {
     // console.log(result) // Debug
 
     input.value = result
-    mathExpression = ""
+    mathExpression = result
 
     return result
 }
