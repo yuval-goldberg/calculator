@@ -53,7 +53,8 @@ button:hover {
     background-color: var(--number-color)
 }
 
-.math-operator {
+.math-operator,
+.equal-operator {
     background-color: var(--math-operator-color);
 }
 
@@ -68,4 +69,21 @@ button:hover {
     padding: 5px;
     margin: 8px 0 0 0;
     font-size: 24px;
+    background-color: #ffffff70;
+    border: 2px solid white;
+}
+
+.expression-input:focus {
+    outline: none;
+}
+
+.dark-mode-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+button.dark-mode-btn {
+    width: 36px;
+    height: 36px;
 }
