@@ -1,6 +1,13 @@
 :root {
-    --number-color: rgb(100, 100, 100, 0.5);
-    --math-operator-color: rgb(255, 136, 0);
+    --number-color: #64646480;
+    --math-operator-color: #ff8800;
+    --background: #f1f1f1;
+    --border-color: #ffffff40;
+    --text-color: black;
+}
+
+* {
+    transition: 0.1s;
 }
 
 body {
@@ -9,8 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #2A7B9B;
-    background: linear-gradient(45deg, rgba(42, 123, 155, 1) 30%, rgba(87, 199, 133, 1) 83%);
+    background-color: var(--background);
     box-sizing: border-box;
     min-height: 100vh;
 }
@@ -23,7 +29,7 @@ body {
     align-items: center;
     padding: 24px 10px 10px 10px;
     border-radius: 15px;
-    border: 2px solid rgb(255, 255, 255, 0.25);
+    border: 2px solid var(--border-color);
     box-shadow: 0 0 4px black;
 }
 
@@ -40,7 +46,7 @@ button {
     border-radius: 8px;
     border: none;
     font-size: 18px;
-    color: black;
+    color: var(--text-color);
     transition: 0.1s;
 }
 
@@ -49,11 +55,12 @@ button:hover {
 }
 
 .number-operator,
-.module-operator {
+.delete-operator,
+#clear {
     background-color: var(--number-color)
 }
 
-.math-operator,
+.module,
 .equal-operator {
     background-color: var(--math-operator-color);
 }
@@ -70,7 +77,8 @@ button:hover {
     margin: 8px 0 0 0;
     font-size: 24px;
     background-color: #ffffff70;
-    border: 2px solid white;
+    border: 2px solid black;
+    border-radius: 8px;
 }
 
 .expression-input:focus {

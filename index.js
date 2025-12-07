@@ -4,10 +4,36 @@ const clearButton = document.querySelector('#clear')
 const equalButton = document.querySelector('.equal-operator')
 const deleteButton = document.querySelector('.delete-operator')
 
+const DOM_ROOT = document.querySelector(':root')
+const rootStyles = getComputedStyle(DOM_ROOT)
+
+const DMImage = document.getElementById('dm-image')
+
+
 // Switching to dark mode button
 const darkModeButton = document.querySelector('.dark-mode-btn')
 
+// MUST Global variables
+let lightMode = true
 let isOperatorExist = false
+
+darkModeButton.addEventListener('click', (event) => {
+    if (lightMode) {
+        DOM_ROOT.style.setProperty('--background', 'gray')
+        DOM_ROOT.style.setProperty('--math-operator-color', 'red')
+        DOM_ROOT.style.setProperty('--text-color', 'white')
+        DMImage.src = 'images/sun.png'
+
+        lightMode = false
+    } else {
+        DOM_ROOT.style.setProperty('--background', '#f1f1f1')
+        DOM_ROOT.style.setProperty('--math-operator-color', '#ff8800')
+        DOM_ROOT.style.setProperty('--text-color', 'black')
+        DMImage.src = 'images/moon.png'
+
+        lightMode = true
+    }
+})
 
 function findCurrentOperator(expression) {
     if (expression.includes("+")) {
@@ -24,7 +50,6 @@ function findCurrentOperator(expression) {
 numberButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
         let currentValue = button.textContent
-
         if ((currentValue === '+' || currentValue === '-' || currentValue === '×' || currentValue === '÷')) {
 
             if (isOperatorExist) {
@@ -43,8 +68,6 @@ numberButtons.forEach((button) => {
         if (currentValue === "π") currentValue = Math.PI.toFixed(3)
         textInput.value += currentValue
     })
-
-
 })
 
 clearButton.addEventListener('click', (event) => {
