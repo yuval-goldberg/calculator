@@ -10,22 +10,18 @@ let darkMode = false
 // Input Expression
 let mathExpression = ""
 let currentOperator = ""
-let isParentheses = false
 let isOperatorExist = false
+let isMinus = false
+
+let firstNumber = 0
+let secondNumber = 0
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
         let currentValue = ""
 
-        if (button.textContent === "()") {
-            if (!isParentheses) {
-                console.log(isParentheses)
-                isParentheses = true
-                currentValue = "("
-            } else {
-                isParentheses = false
-                currentValue = ")"
-            }
+        if (button.textContent === "π") {
+            currentValue = Math.PI.toFixed(4)
         } else {
             currentValue = button.textContent
         }
@@ -39,19 +35,26 @@ operatorButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
         let currentValue = button.textContent
 
+        // Setting the first number of the expression
+        firstNumber = mathExpression
+        console.log(`Current Number: ${firstNumber}`)
+
         if (isOperatorExist) {
-            operate(mathExpression, currentOperator)
+            const operatingResult = operate(mathExpression, currentOperator)
+
             // isOperatorExist = false
+            mathExpression = operatingResult
             mathExpression += currentOperator
             currentOperator = currentValue
-            console.log(currentOperator)
+
+            console.log(`Current Operator: ${currentOperator}`)
 
         } else {
             mathExpression += currentValue
             currentOperator = currentValue
             isOperatorExist = true
 
-            console.log(currentOperator)
+            console.log(`Current Operator: ${currentOperator}`)
 
         }
         input.value += currentValue
@@ -67,27 +70,37 @@ clearButton.addEventListener('click', (event) => {
     isOperatorExist = false
 })
 
-function operate(expression, operator) {
-    const splited = expression.split(operator)
+function operate(firstNum, secondNum, operator) {
+    firstNum = firstNumber
+    secondNum = secondNumber
+
     let result = 0
 
-    switch (operator) {
-        case "+":
-            result = parseFloat(splited[0]) + parseFloat(splited[1])
-            break
+    if (mathExpression === "") {
+        result = mathExpression
+    } else if (secondNum == NaN || operator == "") {
+        result = 0
+    } else {
+        switch (operator) {
+            case "+":
+                result = firstNum + secondNum
+                break
 
-        case "-":
-            result = parseFloat(splited[0]) - parseFloat(splited[1])
-            break
+            case "-":
+                result = firstNum - secondNum
+                break
 
-        case "×":
-            result = parseFloat(splited[0]) * parseFloat(splited[1])
-            break
+            case "×":
+                result = firstNum * secondNum
+                break
 
-        case "÷":
-            result = parseFloat(splited[0]) / parseFloat(splited[1])
-            break
+            case "÷":
+                result = firstNum / secondNum
+                break
+        }
     }
+    console.log(firstNum, secondNum)
+
     result.toFixed(3)
     // console.log(splited) // Debug
     // console.log(result) // Debug
@@ -99,5 +112,5 @@ function operate(expression, operator) {
 }
 
 equalButton.addEventListener('click', (event) => {
-    operate(mathExpression, currentOperator)
+    return operate(mathExpression, currentOperator)
 })
